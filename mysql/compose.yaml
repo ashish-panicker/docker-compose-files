@@ -1,0 +1,26 @@
+# Docker compose file for mysql version 8
+
+version: '3.1'                      # specify docker-compose version
+services:
+  # The docker run command would be
+  # docker run -d --name mysql_db \
+  # -e MYSQL_ROOT_PASSWORD=root \
+  # -e MYSQL_DATABASE=test \
+  # -e MYSQL_USER=test \
+  # -e #MYSQL_PASSWORD=test \
+  # -p 3306:3306 \
+  # -v $(pwd)/data:/var/lib/mysql \
+  # mysql:8
+  mysql_db:                         # Create a mysql_db container
+    image: mysql:8                  # Use mysql version 8 image
+    container_name: mysql_db        # Name of the container
+    restart: always                 # Restart the container always
+    environment:                    # Environment variables
+      MYSQL_ROOT_PASSWORD: root     
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    ports:                          # Ports to expose
+      - "3306:3306"
+    volumes:                        # Volumes to mount
+      - ./data:/var/lib/mysql
