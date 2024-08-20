@@ -23,4 +23,27 @@ services:
     ports:                          # Ports to expose
       - "3306:3306"
     volumes:                        # Volumes to mount
-      - ./data:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
+  mongo_db:
+    image: mongo
+    container_name: mongo_db
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongo:/data/db
+  mongo_express:
+    image: mongo-express
+    container_name: mongo_express
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: root
+      ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo_db:27017
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongo_db
