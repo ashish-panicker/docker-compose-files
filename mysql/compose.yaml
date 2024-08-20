@@ -12,7 +12,7 @@ services:
   # -v $(pwd)/data:/var/lib/mysql \
   # mysql:8
   mysql_db:                         # Create a mysql_db container
-    image: mysql:8                  # Use mysql version 8 image
+    image: mysql:8.0.39                  # Use mysql version 8 image
     container_name: mysql_db        # Name of the container
     restart: always                 # Restart the container always
     environment:                    # Environment variables
